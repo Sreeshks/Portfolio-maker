@@ -2,6 +2,7 @@
 
 A complete full-stack portfolio system consisting of a robust backend API, an admin dashboard, and a stunning public portfolio website with 3 unique switchable templates.
 
+
 ## Architecture Diagram
 
 ```mermaid
