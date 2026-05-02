@@ -1,0 +1,113 @@
+// Portfolio System — Prisma Schema
+// Switch provider to "postgresql" and update DATABASE_URL for production
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+}
+
+model Profile {
+  id          String       @id @default(cuid())
+  name        String       @default("")
+  title       String       @default("")
+  bio         String       @default("")
+  avatar      String       @default("")
+  email       String       @default("")
+  phone       String       @default("")
+  location    String       @default("")
+  resumeUrl   String       @default("")
+  socialLinks SocialLink[]
+}
+
+model SocialLink {
+  id        String  @id @default(cuid())
+  platform  String
+  url       String
+  profileId String
+  profile   Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+}
+
+model Skill {
+  id       String @id @default(cuid())
+  name     String
+  level    Int    @default(50)
+  category String @default("General")
+  icon     String @default("")
+  order    Int    @default(0)
+}
+
+model Project {
+  id          String  @id @default(cuid())
+  title       String
+  description String  @default("")
+  techStack   String  @default("[]")
+  liveUrl     String  @default("")
+  githubUrl   String  @default("")
+  imageUrl    String  @default("")
+  featured    Boolean @default(false)
+  order       Int     @default(0)
+}
+
+model Experience {
+  id          String  @id @default(cuid())
+  company     String
+  role        String
+  duration    String  @default("")
+  description String  @default("")
+  logo        String  @default("")
+  current     Boolean @default(false)
+  order       Int     @default(0)
+}
+
+model Education {
+  id          String @id @default(cuid())
+  institution String
+  degree      String
+  year        String @default("")
+  description String @default("")
+  order       Int    @default(0)
+}
+
+model Testimonial {
+  id       String  @id @default(cuid())
+  name     String
+  role     String  @default("")
+  company  String  @default("")
+  message  String
+  avatar   String  @default("")
+  approved Boolean @default(false)
+}
+
+model Settings {
+  id             String @id @default("default")
+  activeTemplate String @default("minimal")
+  primaryColor   String @default("#6366f1")
+  accentColor    String @default("#f59e0b")
+  fontFamily     String @default("Inter")
+  seoTitle       String @default("My Portfolio")
+  seoDescription String @default("Welcome to my professional portfolio")
+  ogImage        String @default("")
+  analyticsId    String @default("")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String   @default("")
+  message   String
+  createdAt DateTime @default(now())
+  read      Boolean  @default(false)
+}
