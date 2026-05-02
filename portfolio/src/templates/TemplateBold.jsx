@@ -14,7 +14,7 @@ export default function TemplateBold({ data }) {
   const { profile, projects, skills, experience, education, settings } = data;
   const primaryColor = settings.primaryColor || '#6366f1';
   const accentColor = settings.accentColor || '#f59e0b';
-  
+
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 1000], [0, 200]);
   const opacity1 = useTransform(scrollY, [0, 300], [1, 0]);
@@ -35,7 +35,7 @@ export default function TemplateBold({ data }) {
   return (
     <div className="min-h-screen bg-[#0f172a] text-slate-300 selection:bg-indigo-500/30 overflow-hidden relative">
       {/* Spotlight Effect */}
-      <div 
+      <div
         className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
         style={{
           background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, ${primaryColor}15, transparent 40%)`
@@ -61,18 +61,18 @@ export default function TemplateBold({ data }) {
       <main className="relative z-10">
         {/* Hero Section */}
         <section className="relative min-h-screen flex items-center justify-center pt-20 px-6">
-          <motion.div 
+          <motion.div
             style={{ y: y1, opacity: opacity1 }}
             className="text-center w-full max-w-5xl"
           >
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
               className="text-lg md:text-2xl font-bold tracking-widest uppercase mb-6"
               style={{ color: accentColor }}
             >
               {profile.title}
             </motion.h2>
-            <motion.h1 
+            <motion.h1
               initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.1 }}
               className="text-6xl md:text-8xl lg:text-9xl font-black text-white tracking-tighter leading-[0.9] mb-8"
             >
@@ -82,13 +82,13 @@ export default function TemplateBold({ data }) {
                 </span>
               ))}
             </motion.h1>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.3 }}
               className="text-xl md:text-2xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-12"
             >
               {profile.bio}
             </motion.p>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.5 }}
               className="flex justify-center gap-6"
             >
@@ -102,7 +102,7 @@ export default function TemplateBold({ data }) {
               })}
             </motion.div>
           </motion.div>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 1 }}
             className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-slate-500"
           >
@@ -111,15 +111,15 @@ export default function TemplateBold({ data }) {
         </section>
 
         <div className="max-w-7xl mx-auto px-6 py-32 space-y-40">
-          
+
           {/* Projects Bento Grid */}
           <section id="projects">
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight mb-12 uppercase">Featured<br/><span style={{ color: primaryColor }}>Work</span></h2>
+            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight mb-12 uppercase">Featured<br /><span style={{ color: primaryColor }}>Work</span></h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[400px]">
               {projects.map((project, i) => {
                 const isLarge = i === 0 || i === 3; // Make some items span 2 columns
                 return (
-                  <motion.div 
+                  <motion.div
                     key={project.id}
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -155,10 +155,10 @@ export default function TemplateBold({ data }) {
 
           {/* Skills Grid */}
           <section id="skills">
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight mb-12 uppercase">Core<br/><span style={{ color: accentColor }}>Skills</span></h2>
+            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight mb-12 uppercase">Core<br /><span style={{ color: accentColor }}>Skills</span></h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-10">
               {skills.slice(0, 10).map((skill, i) => (
-                <motion.div 
+                <motion.div
                   key={i}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -173,7 +173,7 @@ export default function TemplateBold({ data }) {
                     <span className="text-sm font-mono text-slate-400">{skill.level}%</span>
                   </div>
                   <div className="h-3 w-full bg-slate-800 rounded-full overflow-hidden">
-                    <motion.div 
+                    <motion.div
                       initial={{ width: 0 }}
                       whileInView={{ width: `${skill.level}%` }}
                       viewport={{ once: true }}
@@ -192,10 +192,10 @@ export default function TemplateBold({ data }) {
 
           {/* Experience Timeline */}
           <section id="experience">
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight mb-16 uppercase">Work<br/><span style={{ color: primaryColor }}>History</span></h2>
+            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight mb-16 uppercase">Work<br /><span style={{ color: primaryColor }}>History</span></h2>
             <div className="space-y-12">
               {experience.map((exp, i) => (
-                <motion.div 
+                <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -206,13 +206,13 @@ export default function TemplateBold({ data }) {
                   {i !== experience.length - 1 && (
                     <div className="hidden md:block absolute left-[11.5rem] top-16 bottom-[-3rem] w-px bg-slate-800" />
                   )}
-                  
+
                   <div className="md:w-40 flex-shrink-0 pt-2">
                     <span className="px-4 py-2 rounded-full bg-slate-800 text-sm font-bold text-slate-300 inline-block border border-slate-700">
                       {exp.duration}
                     </span>
                   </div>
-                  
+
                   <div className="flex-1 bg-slate-800/50 border border-slate-700 p-8 rounded-3xl hover:bg-slate-800 transition-colors">
                     <h3 className="text-2xl font-bold text-white mb-2">{exp.role}</h3>
                     <h4 className="text-lg font-medium mb-6 flex items-center gap-2" style={{ color: primaryColor }}>
@@ -234,7 +234,7 @@ export default function TemplateBold({ data }) {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
                 <div>
                   <h2 className="text-5xl md:text-7xl font-black text-white tracking-tight mb-6 leading-none">
-                    READY TO<br/>
+                    READY TO<br />
                     <span style={{ color: accentColor }}>START?</span>
                   </h2>
                   <p className="text-xl text-slate-300 mb-12 max-w-md">
@@ -252,7 +252,7 @@ export default function TemplateBold({ data }) {
                   </div>
                 </div>
                 <div>
-                  <ContactForm 
+                  <ContactForm
                     inputClass="w-full px-6 py-4 bg-slate-900 border border-slate-700 rounded-2xl text-white focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all text-lg"
                     buttonClass="w-full px-8 py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-2 transition-all hover:opacity-90 active:scale-[0.98]"
                     successClass="p-8 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-center flex flex-col items-center gap-4"

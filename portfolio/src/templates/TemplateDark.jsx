@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Github, Linkedin, Twitter, Dribbble, Mail, Code, Terminal, Database, Sparkles } from 'lucide-react';
+import { Github, Linkedin, Twitter, Dribbble, Mail, Code, Terminal, Database, Sparkles, ExternalLink } from 'lucide-react';
 import ContactForm from '../components/ContactForm';
 import { useState, useEffect, useRef } from 'react';
 
@@ -164,7 +164,7 @@ export default function TemplateDark({ data }) {
       <ParticleBackground />
 
       {/* Custom Magnetic Cursor Glow */}
-      <div 
+      <div
         className="fixed w-64 h-64 rounded-full pointer-events-none z-50 mix-blend-screen blur-[80px] opacity-60 transition-transform duration-75 ease-out"
         style={{
           background: accentColor,
@@ -189,7 +189,7 @@ export default function TemplateDark({ data }) {
       </nav>
 
       <main className="relative z-10 max-w-6xl mx-auto px-6 pt-40 pb-32 space-y-40">
-        
+
         {/* Hero */}
         <section className="min-h-[70vh] flex flex-col justify-center">
           <div className="max-w-4xl">
@@ -197,7 +197,7 @@ export default function TemplateDark({ data }) {
               <TypewriterText text={profile.title} />
             </h2>
             <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 tracking-tighter leading-tight">
-              Crafting Digital <br/>
+              Crafting Digital <br />
               <span className="italic font-light text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">Experiences.</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl leading-relaxed mb-12">
@@ -263,8 +263,8 @@ export default function TemplateDark({ data }) {
 
           <div className="flex flex-wrap gap-4">
             {skills.map((skill, i) => (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className="px-6 py-4 rounded-xl glass hover:bg-white/10 hover:border-white/30 hover:shadow-[0_0_20px_rgba(255,255,255,0.05)] transition-all flex items-center gap-3 group cursor-default"
               >
                 {skill.icon ? <span className="text-xl group-hover:scale-110 transition-transform">{skill.icon}</span> : <Sparkles size={16} className="text-gray-500" />}
@@ -276,7 +276,7 @@ export default function TemplateDark({ data }) {
 
         {/* Experience */}
         <section id="experience">
-           <div className="flex items-center gap-4 mb-16">
+          <div className="flex items-center gap-4 mb-16">
             <div className="h-px bg-white/20 w-12" />
             <h2 className="text-3xl font-light tracking-widest uppercase text-white">Experience</h2>
             <div className="h-px bg-white/20 flex-1" />
@@ -305,7 +305,7 @@ export default function TemplateDark({ data }) {
               Have a project in mind? Let's build something extraordinary together.
             </p>
             <div className="w-full max-w-md text-left">
-              <ContactForm 
+              <ContactForm
                 inputClass="w-full px-5 py-4 bg-black/50 border border-white/10 rounded-xl text-white focus:outline-none focus:border-white/40 focus:bg-white/5 transition-all text-sm backdrop-blur-md"
                 buttonClass="w-full px-6 py-4 rounded-xl font-bold text-sm tracking-widest uppercase flex items-center justify-center gap-2 transition-all hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
                 successClass="p-8 rounded-xl bg-white/5 border border-white/10 text-white text-center flex flex-col items-center gap-4 backdrop-blur-md"

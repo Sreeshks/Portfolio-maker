@@ -10,6 +10,9 @@ import ExperienceManager from './pages/ExperienceManager';
 import TestimonialsManager from './pages/TestimonialsManager';
 import TemplateTheme from './pages/TemplateTheme';
 import Settings from './pages/Settings';
+import MessagesManager from './pages/MessagesManager';
+import BlogManager from './pages/BlogManager';
+import LogoManager from './pages/LogoManager';
 
 function ProtectedRoute({ children }) {
   const { user, loading } = useAuth();
@@ -44,6 +47,9 @@ export default function App() {
                 <Route path="testimonials" element={<TestimonialsManager />} />
                 <Route path="templates" element={<TemplateTheme />} />
                 <Route path="settings" element={<Settings />} />
+                <Route path="messages" element={<MessagesManager />} />
+                <Route path="blog" element={<BlogManager />} />
+                <Route path="logos" element={<LogoManager />} />
               </Routes>
             </Layout>
           </ProtectedRoute>

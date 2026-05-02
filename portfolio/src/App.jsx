@@ -3,6 +3,11 @@ import api from './api';
 import TemplateMinimal from './templates/TemplateMinimal';
 import TemplateBold from './templates/TemplateBold';
 import TemplateDark from './templates/TemplateDark';
+import TemplateBento from './templates/TemplateBento';
+import TemplateCyberpunk from './templates/TemplateCyberpunk';
+import TemplateEditorial from './templates/TemplateEditorial';
+import TemplateSpatial from './templates/TemplateSpatial';
+import TemplateJapandi from './templates/TemplateJapandi';
 
 export default function App() {
   const [data, setData] = useState(null);
@@ -19,7 +24,9 @@ export default function App() {
           skillsRes,
           experienceRes,
           educationRes,
-          testimonialsRes
+          testimonialsRes,
+          blogRes,
+          logosRes
         ] = await Promise.all([
           api.get('/settings'),
           api.get('/profile'),
@@ -27,11 +34,13 @@ export default function App() {
           api.get('/skills'),
           api.get('/experience'),
           api.get('/education'),
-          api.get('/testimonials')
+          api.get('/testimonials'),
+          api.get('/blog'),
+          api.get('/logos')
         ]);
 
         const settings = settingsRes.data;
-        
+
         // Setup SEO
         document.title = settings.seoTitle || 'Portfolio';
         const metaDesc = document.querySelector('meta[name="description"]');
@@ -47,7 +56,7 @@ export default function App() {
         // Apply primary color as CSS variable for global use
         document.documentElement.style.setProperty('--primary-color', settings.primaryColor || '#6366f1');
         document.documentElement.style.setProperty('--accent-color', settings.accentColor || '#f59e0b');
-        
+
         setData({
           settings,
           profile: profileRes.data,
@@ -55,7 +64,9 @@ export default function App() {
           skills: skillsRes.data,
           experience: experienceRes.data,
           education: educationRes.data,
-          testimonials: testimonialsRes.data
+          testimonials: testimonialsRes.data,
+          blog: blogRes.data,
+          logos: logosRes.data
         });
       } catch (err) {
         console.error(err);
@@ -97,7 +108,12 @@ export default function App() {
       {settings.activeTemplate === 'minimal' && <TemplateMinimal data={data} />}
       {settings.activeTemplate === 'bold' && <TemplateBold data={data} />}
       {settings.activeTemplate === 'dark' && <TemplateDark data={data} />}
-      {!['minimal', 'bold', 'dark'].includes(settings.activeTemplate) && (
+      {settings.activeTemplate === 'bento' && <TemplateBento data={data} />}
+      {settings.activeTemplate === 'cyberpunk' && <TemplateCyberpunk data={data} />}
+      {settings.activeTemplate === 'editorial' && <TemplateEditorial data={data} />}
+      {settings.activeTemplate === 'spatial' && <TemplateSpatial data={data} />}
+      {settings.activeTemplate === 'japandi' && <TemplateJapandi data={data} />}
+      {!['minimal', 'bold', 'dark', 'bento', 'cyberpunk', 'editorial', 'spatial', 'japandi'].includes(settings.activeTemplate) && (
         <TemplateMinimal data={data} />
       )}
     </div>

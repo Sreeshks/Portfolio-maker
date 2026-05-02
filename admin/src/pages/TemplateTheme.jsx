@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import api from '../api';
 import toast from 'react-hot-toast';
-import { Save, Check, Palette } from 'lucide-react';
+import { Save, Check, Palette, Smartphone, Monitor, RefreshCcw } from 'lucide-react';
 
 const TEMPLATES = [
   {
@@ -24,6 +24,41 @@ const TEMPLATES = [
     description: 'Pure black with glassmorphism cards, neon glows, 3D tilt effects, and particle backgrounds.',
     colors: ['#000000', '#111111', '#00ff88'],
     preview: 'linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #111827 100%)'
+  },
+  {
+    id: 'bento',
+    name: 'Aurora Bento',
+    description: 'Vibrant mesh gradients with asymmetric bento-style glass cards and floating particles.',
+    colors: ['#0f172a', '#ec4899', '#8b5cf6'],
+    preview: 'linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)'
+  },
+  {
+    id: 'cyberpunk',
+    name: 'Neon Terminal',
+    description: 'Retro-futuristic CLI aesthetic with matrix-green neon, scanlines, and glitch effects.',
+    colors: ['#000000', '#00ff41', '#ff00ff'],
+    preview: 'repeating-linear-gradient(0deg, #000, #000 2px, #00ff41 2px, #00ff41 3px)'
+  },
+  {
+    id: 'editorial',
+    name: 'Luxury Editorial',
+    description: 'High-fashion magazine layout with cream paper textures, bold serif fonts, and gold accents.',
+    colors: ['#f9f7f2', '#1a1a1a', '#c5a059'],
+    preview: 'linear-gradient(135deg, #f9f7f2 0%, #e5e5e5 100%)'
+  },
+  {
+    id: 'spatial',
+    name: '3D Spatial',
+    description: 'Deep space UI with mouse-tracking perspective tilt, glowing orbs, and radial progress rings.',
+    colors: ['#050505', '#a855f7', '#06b6d4'],
+    preview: 'radial-gradient(circle at center, #1e1b4b 0%, #050505 100%)'
+  },
+  {
+    id: 'japandi',
+    name: 'Japandi Zen',
+    description: 'Minimalist washi paper textures with terracotta accents and meditative ink-wash animations.',
+    colors: ['#faf7f2', '#4a3f35', '#d4a373'],
+    preview: 'linear-gradient(135deg, #faf7f2 0%, #f0ede6 100%)'
   }
 ];
 
@@ -36,6 +71,8 @@ export default function TemplateTheme() {
   const [settings, setSettings] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [previewSize, setPreviewSize] = useState('desktop');
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => { loadSettings(); }, []);
 
@@ -60,6 +97,7 @@ export default function TemplateTheme() {
         fontFamily: settings.fontFamily
       });
       setSettings(data);
+      setRefreshKey(prev => prev + 1);
       toast.success('Theme settings saved! Portfolio updated.');
     } catch (err) {
       toast.error('Failed to save');
@@ -102,11 +140,10 @@ export default function TemplateTheme() {
               <button
                 key={template.id}
                 onClick={() => selectTemplate(template.id)}
-                className={`text-left p-1 rounded-2xl transition-all duration-300 ${
-                  isActive
-                    ? 'ring-2 ring-brand-500 ring-offset-2 ring-offset-[#0f0f23]'
-                    : 'hover:ring-1 hover:ring-white/20'
-                }`}
+                className={`text-left p-1 rounded-2xl transition-all duration-300 ${isActive
+                  ? 'ring-2 ring-brand-500 ring-offset-2 ring-offset-[#0f0f23]'
+                  : 'hover:ring-1 hover:ring-white/20'
+                  }`}
               >
                 {/* Preview */}
                 <div
@@ -233,11 +270,10 @@ export default function TemplateTheme() {
             <button
               key={font}
               onClick={() => setSettings(prev => ({ ...prev, fontFamily: font }))}
-              className={`p-4 rounded-xl border text-center transition-all ${
-                settings.fontFamily === font
-                  ? 'bg-brand-500/10 border-brand-500/30 text-brand-400'
-                  : 'bg-white/5 border-white/5 text-gray-400 hover:border-white/10 hover:text-white'
-              }`}
+              className={`p-4 rounded-xl border text-center transition-all ${settings.fontFamily === font
+                ? 'bg-brand-500/10 border-brand-500/30 text-brand-400'
+                : 'bg-white/5 border-white/5 text-gray-400 hover:border-white/10 hover:text-white'
+                }`}
             >
               <span className="text-lg font-semibold block mb-1" style={{ fontFamily: font }}>Aa</span>
               <span className="text-xs">{font}</span>
@@ -246,44 +282,68 @@ export default function TemplateTheme() {
         </div>
       </div>
 
-      {/* Preview */}
+      {/* Real-time Device Preview */}
       <div className="glass-card p-6">
-        <h2 className="text-lg font-semibold text-white mb-4">Live Preview</h2>
-        <div
-          className="rounded-xl p-8 border border-white/5"
-          style={{
-            background: settings.activeTemplate === 'minimal'
-              ? 'linear-gradient(135deg, #f8fafc, #e2e8f0)'
-              : settings.activeTemplate === 'bold'
-                ? 'linear-gradient(135deg, #0f172a, #1e1b4b)'
-                : 'linear-gradient(135deg, #000, #111827)',
-            fontFamily: settings.fontFamily
-          }}
-        >
-          <div style={{ color: settings.activeTemplate === 'minimal' ? '#1e293b' : '#ffffff' }}>
-            <p className="text-xs opacity-50 mb-2">PREVIEW</p>
-            <h2 className="text-2xl font-bold mb-2">Hello, I'm Alex Rivera</h2>
-            <p className="text-sm opacity-60 mb-4">Full-Stack Developer & Designer</p>
-            <div className="flex gap-3">
-              <span
-                className="px-4 py-2 rounded-lg text-white text-sm font-medium"
-                style={{ backgroundColor: settings.primaryColor }}
-              >
-                View Projects
-              </span>
-              <span
-                className="px-4 py-2 rounded-lg text-sm font-medium border"
-                style={{
-                  borderColor: settings.accentColor,
-                  color: settings.accentColor
-                }}
-              >
-                Contact Me
-              </span>
-            </div>
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-lg font-semibold text-white">Portfolio Live Preview</h2>
+            <p className="text-xs text-gray-500">Actual view of your portfolio (Save changes to update)</p>
+          </div>
+          <div className="flex items-center gap-2 p-1 bg-white/5 rounded-xl">
+            <button
+              onClick={() => setPreviewSize('mobile')}
+              className={`p-2 rounded-lg transition-all ${previewSize === 'mobile' ? 'bg-brand-600 text-white' : 'text-gray-400 hover:text-white'}`}
+              title="Mobile View"
+            >
+              <Smartphone size={18} />
+            </button>
+            <button
+              onClick={() => setPreviewSize('desktop')}
+              className={`p-2 rounded-lg transition-all ${previewSize === 'desktop' ? 'bg-brand-600 text-white' : 'text-gray-400 hover:text-white'}`}
+              title="Desktop View"
+            >
+              <Monitor size={18} />
+            </button>
+            <div className="w-px h-4 bg-white/10 mx-1" />
+            <button
+              onClick={() => setRefreshKey(k => k + 1)}
+              className="p-2 rounded-lg text-gray-400 hover:text-white hover:bg-white/5 transition-all"
+              title="Refresh Preview"
+            >
+              <RefreshCcw size={18} />
+            </button>
           </div>
         </div>
+
+        <div
+          className={`mx-auto transition-all duration-500 ease-in-out border-[12px] border-gray-900 rounded-[2.5rem] bg-[#0a0a0a] shadow-2xl overflow-hidden relative ${previewSize === 'mobile' ? 'w-[360px] h-[640px]' : 'w-full h-[600px]'
+            }`}
+        >
+          {/* Status Bar for mobile */}
+          {previewSize === 'mobile' && (
+            <div className="absolute top-0 left-0 right-0 h-6 bg-gray-900 flex justify-center items-center z-20">
+              <div className="w-16 h-1 bg-white/20 rounded-full" />
+            </div>
+          )}
+
+          <iframe
+            key={refreshKey}
+            src="http://localhost:5173"
+            className="w-full h-full border-none bg-white"
+            title="Portfolio Preview"
+          />
+
+          {/* Loading overlay for iframe */}
+          <div className="absolute inset-0 pointer-events-none flex items-center justify-center bg-black/20 backdrop-blur-[2px] opacity-0 animate-pulse">
+            <RefreshCcw className="text-white animate-spin" />
+          </div>
+        </div>
+
+        <p className="text-center text-xs text-gray-500 mt-6 italic">
+          Tip: Open <a href="http://localhost:5173" target="_blank" rel="noreferrer" className="text-brand-400 hover:underline">localhost:5173</a> in a new tab for full experience.
+        </p>
       </div>
+
     </div>
   );
 }

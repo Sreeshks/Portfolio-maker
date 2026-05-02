@@ -3,7 +3,7 @@ const { authenticate } = require('../middleware/auth');
 const { z } = require('zod');
 
 const settingsSchema = z.object({
-  activeTemplate: z.enum(['minimal', 'bold', 'dark']).optional(),
+  activeTemplate: z.enum(['minimal', 'bold', 'dark', 'bento', 'cyberpunk', 'editorial', 'spatial', 'japandi']).optional(),
   primaryColor: z.string().optional(),
   accentColor: z.string().optional(),
   fontFamily: z.string().optional(),

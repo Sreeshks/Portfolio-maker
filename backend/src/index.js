@@ -55,6 +55,9 @@ app.use('/api/settings', require('./routes/settings'));
 app.use('/api/upload', require('./routes/upload'));
 app.use('/api/contact', contactLimiter, require('./routes/contact'));
 app.use('/api/messages', require('./routes/messages'));
+app.use('/api/stats', require('./routes/stats'));
+app.use('/api/blog', require('./routes/blog'));
+app.use('/api/logos', require('./routes/logos'));
 
 // ─── Health Check ───────────────────────────────────────────
 app.get('/api/health', (req, res) => {

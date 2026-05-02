@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard, User, FolderKanban, Zap, Briefcase,
   GraduationCap, MessageSquareQuote, Palette, Settings,
-  LogOut, ExternalLink, X, Sparkles
+  LogOut, ExternalLink, X, Sparkles, Mail, Newspaper, Building2
 } from 'lucide-react';
 
 const navItems = [
@@ -14,6 +14,9 @@ const navItems = [
   { to: '/experience', icon: Briefcase, label: 'Experience' },
   { to: '/testimonials', icon: MessageSquareQuote, label: 'Testimonials' },
   { to: '/templates', icon: Palette, label: 'Templates' },
+  { to: '/messages', icon: Mail, label: 'Messages' },
+  { to: '/blog', icon: Newspaper, label: 'Blog' },
+  { to: '/logos', icon: Building2, label: 'Clients' },
   { to: '/settings', icon: Settings, label: 'Settings' },
 ];
 
